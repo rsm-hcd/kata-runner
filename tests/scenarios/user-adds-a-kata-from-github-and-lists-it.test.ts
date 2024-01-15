@@ -9,7 +9,7 @@ import { KataFixture } from "../kata.fixture.ts";
 import { KvFixture } from "../kv.fixture.ts";
 
 describe("Given a user has no katas configured", () => {
-  describe("Given the user adds a kata", () => {
+  describe("Given the user adds a kata from github", () => {
     const helpFixture = KataFixture.initialize();
 
     const givenKataUrl = "https://fake-kata.com";

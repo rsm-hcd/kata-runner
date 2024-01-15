@@ -1,4 +1,4 @@
-import { deleteFilesIfExists } from "./.vscode/file-system/delete-file.ts";
+import { deleteFilesIfExists } from "./file-system/delete-file.ts";
 
 export class KvStoreContext {
   private static kv: Deno.Kv | null = null;

@@ -1,4 +1,4 @@
-import { exists } from "../../deps.ts";
+import { exists } from "../deps.ts";
 
 export async function deleteFileIfExists(filePath: string): Promise<void> {
   const doesFileExist = await exists(filePath);

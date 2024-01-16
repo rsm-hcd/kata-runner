@@ -13,7 +13,7 @@ export function addCommand(denomander: Denomander) {
         const kata = await addKata(denomander.kataUrl);
         console.log(`${kata.name} added successfully!`);
       } catch (error) {
-        console.error(error.message);
+        console.log(error.message);
       }
     });
 }

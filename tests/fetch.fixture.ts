@@ -7,10 +7,10 @@ export class FetchFixture {
     MockFetch.install();
   }
 
-  static mockGetRequest<T>(url: string, response: T): void {
-    const responseString = JSON.stringify(response);
+  static mockGetRequest(url: string, response: any): void {
+    // const responseString = JSON.stringify(response);
     MockFetch.mock(`GET@${url}`, (_req, params) => {
-      return new Response(responseString, {
+      return new Response(response, {
         status: 200,
       });
     });

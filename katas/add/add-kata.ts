@@ -12,6 +12,9 @@ export async function addKataWithName(
   url: string
 ): Promise<Kata> {
   await validateGithubUrl(url);
+  console.log(
+    "I dont get here in tests because the mock fetch must not be setup right"
+  );
   const kata = buildKata(name, url);
   await persistKata(kata);
   return kata;

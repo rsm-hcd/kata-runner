@@ -17,7 +17,7 @@ describe("Given a user has no katas configured", () => {
     const githubResult: GithubResult = GithubResultBuilder.init().build();
     beforeAll(() => {
       FetchFixture.replaceFetch();
-      FetchFixture.mockGetRequest(kataUrl.pathname, githubResult);
+      FetchFixture.mockGetRequest("/fake-place/my-kata", githubResult);
     });
     describe("Given only the url", () => {
       let outputString = "";
@@ -25,9 +25,7 @@ describe("Given a user has no katas configured", () => {
       const expectedSuccessMessage = "my-kata added successfully!";
       beforeAll(async () => {
         const helpFixture = KataFixture.initialize();
-        outputString = await helpFixture.executeAddCommand(
-          "https://github.com/fake-place/my-kata"
-        );
+        outputString = await helpFixture.executeAddCommand(kataUrl.href);
       });
       it("Then the user should see a success message with the name of the folder the kata is found in", () => {
         assertStringIncludes(

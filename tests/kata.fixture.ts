@@ -9,41 +9,17 @@ export class KataFixture extends CliAdapter {
   }
 
   async executeAddCommand(url: string): Promise<string> {
-    const command = new Deno.Command("deno", {
-      args: [
-        "run",
-        "--allow-all",
-        "--unstable",
-        "./mod.ts",
-        "kata",
-        "add",
-        url,
-      ],
-    });
-    const textResponse = await this.runCommand(command);
+    const textResponse = await this.runCommand(["kata", "add", url]);
     return textResponse;
   }
 
   async executeListCommand(): Promise<string> {
-    const command = new Deno.Command("deno", {
-      args: ["run", "--allow-all", "--unstable", "./mod.ts", "kata", "list"],
-    });
-    const textResponse = await this.runCommand(command);
+    const textResponse = await this.runCommand(["kata", "list"]);
     return textResponse;
   }
 
-  executeRemoveCommand(name: string): Promise<string> {
-    const command = new Deno.Command("deno", {
-      args: [
-        "run",
-        "--allow-all",
-        "--unstable",
-        "./mod.ts",
-        "kata",
-        "remove",
-        name,
-      ],
-    });
-    return this.runCommand(command);
+  async executeRemoveCommand(name: string): Promise<string> {
+    const textResponse = await this.runCommand(["kata", "remove", name]);
+    return textResponse;
   }
 }

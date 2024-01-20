@@ -9,10 +9,7 @@ export class HelpFixture extends CliAdapter {
   }
 
   async executeHelpCommand(): Promise<string> {
-    const command = new Deno.Command("deno", {
-      args: ["run", "--allow-all", "./mod.ts", "--help"],
-    });
-    const textResponse = await this.runCommand(command);
+    const textResponse = await this.runCommand(["--help"]);
     return textResponse;
   }
 }

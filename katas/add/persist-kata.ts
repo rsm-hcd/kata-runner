@@ -3,7 +3,7 @@ import { Kata } from "../kata.ts";
 
 export async function persistKata(kata: Kata): Promise<void> {
   const kv = await KvStoreContext.getKv();
-  const key = kata.url.toString();
+  const key = kata.name;
   const value = kata;
   await kv.set(["kata", key], value);
 }

@@ -31,4 +31,19 @@ export class KataFixture extends CliAdapter {
     const textResponse = await this.runCommand(command);
     return textResponse;
   }
+
+  executeRemoveCommand(name: string): Promise<string> {
+    const command = new Deno.Command("deno", {
+      args: [
+        "run",
+        "--allow-all",
+        "--unstable",
+        "./mod.ts",
+        "kata",
+        "remove",
+        name,
+      ],
+    });
+    return this.runCommand(command);
+  }
 }

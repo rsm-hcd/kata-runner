@@ -1,20 +1,32 @@
+import { doesDirectoryExist } from "../../github-integration/mod.ts";
 import { Kata } from "../kata.ts";
-import { getInfoFromKata } from "./get-kata-discovery-data.ts";
-import { KataDiscoveryData } from "./kata-discovery-data.ts";
 import { persistKata } from "./persist-kata.ts";
 
-export async function addKata(url: string): Promise<void> {
-  const kataDiscoveryData = await getInfoFromKata(url);
-  const kata = convertKataDiscoveryDataToKata(kataDiscoveryData);
-  console.log("kata to be added", kata);
-  await persistKata(kata);
+export async function addKata(url: string): Promise<Kata> {
+  const name = url.split("/").pop() as string;
+  return await addKataWithName(name, url);
 }
 
-function convertKataDiscoveryDataToKata(
-  kataDiscoveryData: KataDiscoveryData
-): Kata {
+export async function addKataWithName(
+  name: string,
+  url: string
+): Promise<Kata> {
+  await validateGithubUrl(url);
+  const kata = buildKata(name, url);
+  await persistKata(kata);
+  return kata;
+}
+
+async function validateGithubUrl(url: string): Promise<void> {
+  const directoryExists = await doesDirectoryExist(url);
+  if (!directoryExists) {
+    throw new Error("Not a directory");
+  }
+}
+
+function buildKata(name: string, url: string): Kata {
   return {
-    name: kataDiscoveryData.name,
-    url: kataDiscoveryData.url,
+    name: name,
+    url: url,
   };
 }

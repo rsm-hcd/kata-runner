@@ -9,12 +9,14 @@ import { KataFixture } from "../kata.fixture.ts";
 import { KvFixture } from "../kv.fixture.ts";
 
 describe("Given a user has no katas configured", () => {
-  describe("Given the user adds a kata", () => {
+  describe("Given the user adds a kata from github", () => {
     const helpFixture = KataFixture.initialize();
 
-    const givenKataUrl = "https://fake-kata.com";
+    const kataUrl = new URL(
+      `https://api.github.com/repos/rsm-hcd/cop-clean-code-katas/contents/kata-templates/hello-world`
+    );
     beforeAll(async () => {
-      await helpFixture.executeAddCommand(givenKataUrl);
+      await helpFixture.executeAddCommand(kataUrl.href);
     });
     describe("When the user lists their katas", () => {
       let outputString = "";
@@ -24,7 +26,7 @@ describe("Given a user has no katas configured", () => {
       it("Then the user should see their kata in the message", () => {
         assertStringIncludes(
           outputString,
-          givenKataUrl,
+          "hello-world",
           "the expected kata was not found in the return message when listing a newly added kata"
         );
       });

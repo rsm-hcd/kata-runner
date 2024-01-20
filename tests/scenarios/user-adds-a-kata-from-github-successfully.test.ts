@@ -9,16 +9,19 @@ import { KataFixture } from "../kata.fixture.ts";
 import { KvFixture } from "../kv.fixture.ts";
 
 describe("Given a user has no katas configured", () => {
-  describe("When the user adds a kata", () => {
-    describe("And the kata is valid", () => {
+  describe("When the user adds a kata from github", () => {
+    const kataUrl = new URL(
+      `https://api.github.com/repos/rsm-hcd/cop-clean-code-katas/contents/kata-templates/hello-world`
+    );
+    describe("Given only the url", () => {
       let outputString = "";
-      const givenKataUrl = "https://fake-kata.com";
-      const expectedSuccessMessage = "Kata added successfully!";
+
+      const expectedSuccessMessage = "hello-world added successfully!";
       beforeAll(async () => {
         const helpFixture = KataFixture.initialize();
-        outputString = await helpFixture.executeAddCommand(givenKataUrl);
+        outputString = await helpFixture.executeAddCommand(kataUrl.href);
       });
-      it("Then the user should see a success message", () => {
+      it("Then the user should see a success message with the name of the folder the kata is found in", () => {
         assertStringIncludes(
           outputString,
           expectedSuccessMessage,

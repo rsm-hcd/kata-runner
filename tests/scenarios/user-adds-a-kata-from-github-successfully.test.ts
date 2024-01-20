@@ -5,24 +5,18 @@ import {
   describe,
   it,
 } from "../../deps.ts";
-import { GithubResult } from "../../github-integration/github-result.ts";
-import { FetchFixture } from "../fetch.fixture.ts";
-import { GithubResultBuilder } from "../github-result.builder.ts";
 import { KataFixture } from "../kata.fixture.ts";
 import { KvFixture } from "../kv.fixture.ts";
 
 describe("Given a user has no katas configured", () => {
   describe("When the user adds a kata from github", () => {
-    const kataUrl = new URL("https://github.com/fake-place/my-kata");
-    const githubResult: GithubResult = GithubResultBuilder.init().build();
-    beforeAll(() => {
-      FetchFixture.replaceFetch();
-      FetchFixture.mockGetRequest("/fake-place/my-kata", githubResult);
-    });
+    const kataUrl = new URL(
+      `https://api.github.com/repos/rsm-hcd/cop-clean-code-katas/contents/kata-templates/hello-world`
+    );
     describe("Given only the url", () => {
       let outputString = "";
 
-      const expectedSuccessMessage = "my-kata added successfully!";
+      const expectedSuccessMessage = "hello-world added successfully!";
       beforeAll(async () => {
         const helpFixture = KataFixture.initialize();
         outputString = await helpFixture.executeAddCommand(kataUrl.href);

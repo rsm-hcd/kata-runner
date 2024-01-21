@@ -1,3 +1,5 @@
+import { createFolder } from "./file-system/mod.ts";
+
 export class KvStoreContext {
   private static kvStoreName = "kata-runner-store";
   private static kv: Deno.Kv | null = null;
@@ -23,9 +25,14 @@ export class KvStoreContext {
     if (workingDirectory) {
       const kvStoreLocation = `${workingDirectory}/${KvStoreContext.kvStoreName}`;
       const kv = await Deno.openKv(kvStoreLocation);
+
       return Promise.resolve(kv);
     }
-    const kv = await Deno.openKv(KvStoreContext.kvStoreName);
+    const home = Deno.env.get("HOME");
+    await createFolder(`${home}/kata-runner`);
+    const kv = await Deno.openKv(
+      `${home}/kata-runner/${KvStoreContext.kvStoreName}`
+    );
     return kv;
   }
 }

@@ -5,8 +5,8 @@ import {
   describe,
   it,
 } from "../../deps.ts";
+import { DirectoryFixture } from "../directory.fixture.ts";
 import { HelpFixture } from "../help.fixture.ts";
-import { KvFixture } from "../kv.fixture.ts";
 
 describe("given kata CLI is installed", () => {
   describe("when the user is looking for help", () => {
@@ -38,6 +38,7 @@ describe("given kata CLI is installed", () => {
   });
 
   afterAll(async () => {
-    await KvFixture.cleanUp();
+    const directoryFixture = await DirectoryFixture.initialize();
+    await directoryFixture.cleanUp();
   });
 });

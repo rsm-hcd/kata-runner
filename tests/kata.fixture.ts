@@ -22,4 +22,9 @@ export class KataFixture extends CliAdapter {
     const textResponse = await this.runCommand(["kata", "remove", name]);
     return textResponse;
   }
+
+  async executeBeginCommand(name: string): Promise<string> {
+    const textResponse = await this.runCommand(["kata", "begin", name]);
+    return textResponse;
+  }
 }

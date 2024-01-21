@@ -1,10 +1,12 @@
 import {
+  afterAll,
   assert,
   assertStringIncludes,
   beforeAll,
   describe,
   it,
 } from "../../deps.ts";
+import { DirectoryFixture } from "../directory.fixture.ts";
 import { KataFixture } from "../kata.fixture.ts";
 
 describe("Given a user has a kata added", () => {
@@ -46,5 +48,10 @@ describe("Given a user has a kata added", () => {
         "the kata was still found in the list of katas after it was supposed to be removed"
       );
     });
+  });
+
+  afterAll(async () => {
+    const directoryFixture = await DirectoryFixture.initialize();
+    await directoryFixture.cleanUp();
   });
 });

@@ -1,7 +1,7 @@
 export abstract class CliAdapter {
   constructor() {}
 
-  protected buildBaseCommandArgs(): string[] {
+  private buildBaseCommandArgs(): string[] {
     const args = ["run", "--allow-all", "--unstable", "./mod.ts"];
     return args;
   }

@@ -5,8 +5,8 @@ import {
   describe,
   it,
 } from "../../deps.ts";
+import { DirectoryFixture } from "../directory.fixture.ts";
 import { KataFixture } from "../kata.fixture.ts";
-import { KvFixture } from "../kv.fixture.ts";
 
 describe("Given a user has no katas configured", () => {
   describe("when the user lists their katas", () => {
@@ -26,6 +26,7 @@ describe("Given a user has no katas configured", () => {
   });
 
   afterAll(async () => {
-    await KvFixture.cleanUp();
+    const directoryFixture = await DirectoryFixture.initialize();
+    await directoryFixture.cleanUp();
   });
 });

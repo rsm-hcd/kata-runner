@@ -1,5 +1,6 @@
 import { Denomander } from "../deps.ts";
 import { addCommand } from "./add/mod.ts";
+import { beginCommand } from "./begin/mod.ts";
 import { listCommand } from "./list/mod.ts";
 import { removeCommand } from "./remove/mod.ts";
 
@@ -8,4 +9,5 @@ export function registerKataCommands(denomander: Denomander) {
   listCommand(parent);
   addCommand(parent);
   removeCommand(parent);
+  beginCommand(parent);
 }

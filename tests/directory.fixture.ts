@@ -16,11 +16,6 @@ export class DirectoryFixture {
   async doesDirectoryContainFiles(directoryPath: string): Promise<boolean> {
     const fullPath = `${DirectoryFixture.workingDirectoryPath}/${directoryPath}`;
     const directoryContentNames = await this.getFileNamesInDirectory(fullPath);
-    console.log(
-      "AHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
-      fullPath,
-      directoryContentNames
-    );
     return directoryContentNames.length > 0;
   }
 

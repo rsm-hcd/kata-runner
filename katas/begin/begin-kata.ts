@@ -21,11 +21,11 @@ async function getKataDownloadUrl(kataName: string): Promise<string> {
 }
 
 async function recursiveCopy(
-  sourceFolder: string,
+  kataDownloadUrl: string,
   localFolderPath: string
 ): Promise<void> {
   try {
-    const githubResults = await downloadContents(sourceFolder);
+    const githubResults = await downloadContents(kataDownloadUrl);
     // Create the destination directory if it doesn't exist
     await createFolder(localFolderPath);
 

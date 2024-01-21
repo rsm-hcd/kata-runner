@@ -8,8 +8,8 @@ export function beginCommand(denomander: Denomander) {
     .option(
       "-d, --directory",
       "The directory to create the kata in",
-      undefined,
-      "./tests/test-sandbox"
+      (directory: string) => directory.replace(/\/$/, ""),
+      Deno.env.get("WORKING_DIRECTORY") ?? "./"
     )
     .action(async () => {
       try {
@@ -17,7 +17,10 @@ export function beginCommand(denomander: Denomander) {
         // i changed the store name. I wonder how this works when i just run the tool
         // if i have to run the tool to know how it works then i need to get that in the tests
         // so i maintain 100% confidence in the tests
-        await beginKata(denomander.kataName, denomander.directory);
+        await beginKata(
+          denomander.kataName,
+          `${denomander.directory}/${denomander.kataName}`
+        );
         console.log(
           `Directory hydrated successfully for Kata: ${denomander.kataName}`
         );

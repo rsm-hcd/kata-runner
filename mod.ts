@@ -3,9 +3,6 @@ import { registerKataCommands } from "./katas/mod.ts";
 
 function registerCommands(denomander: Denomander) {
   registerKataCommands(denomander);
-  denomander.command("test", "its a test").action(() => {
-    console.log("TEST!!", import.meta.url);
-  });
 }
 
 function runCliTool() {

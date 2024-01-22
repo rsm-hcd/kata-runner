@@ -1,21 +1,13 @@
-import {
-  afterAll,
-  assertStringIncludes,
-  beforeAll,
-  describe,
-  it,
-} from "../../deps.ts";
-import { DirectoryFixture } from "../directory.fixture.ts";
-import { HelpFixture } from "../help.fixture.ts";
+import { assertStringIncludes, beforeAll, describe, it } from "../../deps.ts";
+import { GlobalContext, globalSuite } from "./_global-scenario-setup.test.ts";
 
-describe("given kata CLI is installed", () => {
+describe(globalSuite, "given kata CLI is installed", () => {
   describe("when the user is looking for help", () => {
     describe("given no arguments", () => {
-      describe("should see the app's: ", async () => {
+      describe("should see the app's: ", () => {
         let outputString = "";
-        beforeAll(async () => {
-          const helpFixture = HelpFixture.initialize();
-          outputString = await helpFixture.executeHelpCommand();
+        beforeAll(async function (this: GlobalContext) {
+          outputString = await this.helpFixture.executeHelpCommand();
         });
 
         it("name", () => {
@@ -35,10 +27,5 @@ describe("given kata CLI is installed", () => {
         });
       });
     });
-  });
-
-  afterAll(async () => {
-    const directoryFixture = await DirectoryFixture.initialize();
-    await directoryFixture.cleanUp();
   });
 });

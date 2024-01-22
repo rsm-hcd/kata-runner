@@ -1,20 +1,12 @@
-import {
-  afterAll,
-  assertStringIncludes,
-  beforeAll,
-  describe,
-  it,
-} from "../../deps.ts";
-import { DirectoryFixture } from "../directory.fixture.ts";
-import { KataFixture } from "../kata.fixture.ts";
+import { assertStringIncludes, beforeAll, describe, it } from "../../deps.ts";
+import { GlobalContext, globalSuite } from "./_global-scenario-setup.test.ts";
 
-describe("Given a user has no katas configured", () => {
+describe(globalSuite, "Given a user has no katas configured", () => {
   describe("when the user lists their katas", () => {
     let outputString = "";
     const expectedMessage = "There are no katas added on this machine.";
-    beforeAll(async () => {
-      const helpFixture = KataFixture.initialize();
-      outputString = await helpFixture.executeListCommand();
+    beforeAll(async function (this: GlobalContext) {
+      outputString = await this.kataFixture.executeListCommand();
     });
     it("then the user should see a message indicating they have no katas configured", () => {
       assertStringIncludes(
@@ -23,10 +15,5 @@ describe("Given a user has no katas configured", () => {
         "the expected message was not found when listing katas with none configured"
       );
     });
-  });
-
-  afterAll(async () => {
-    const directoryFixture = await DirectoryFixture.initialize();
-    await directoryFixture.cleanUp();
   });
 });

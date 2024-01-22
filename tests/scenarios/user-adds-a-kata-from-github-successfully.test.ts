@@ -1,14 +1,7 @@
-import {
-  afterAll,
-  assertStringIncludes,
-  beforeAll,
-  describe,
-  it,
-} from "../../deps.ts";
-import { DirectoryFixture } from "../directory.fixture.ts";
-import { KataFixture } from "../kata.fixture.ts";
+import { assertStringIncludes, beforeAll, describe, it } from "../../deps.ts";
+import { GlobalContext, globalSuite } from "./_global-scenario-setup.test.ts";
 
-describe("Given a user has no katas configured", () => {
+describe(globalSuite, "Given a user has no katas configured", () => {
   describe("When the user adds a kata from github", () => {
     const kataUrl = new URL(
       `https://api.github.com/repos/rsm-hcd/cop-clean-code-katas/contents/kata-templates/hello-world`
@@ -17,9 +10,8 @@ describe("Given a user has no katas configured", () => {
       let outputString = "";
 
       const expectedSuccessMessage = "hello-world added successfully!";
-      beforeAll(async () => {
-        const helpFixture = KataFixture.initialize();
-        outputString = await helpFixture.executeAddCommand(kataUrl.href);
+      beforeAll(async function (this: GlobalContext) {
+        outputString = await this.kataFixture.executeAddCommand(kataUrl.href);
       });
       it("Then the user should see a success message with the name of the folder the kata is found in", () => {
         assertStringIncludes(
@@ -29,10 +21,5 @@ describe("Given a user has no katas configured", () => {
         );
       });
     });
-  });
-
-  afterAll(async () => {
-    const directoryFixture = await DirectoryFixture.initialize();
-    await directoryFixture.cleanUp();
   });
 });

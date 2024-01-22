@@ -1,8 +1,11 @@
 import { assertStringIncludes, beforeAll, describe, it } from "../../deps.ts";
-import { GlobalContext, globalSuite } from "./_global-scenario-setup.test.ts";
+import { GlobalContext } from "./_global-scenario-setup.test.ts";
+import { freshInstallationSuite } from "./user-lists-katas-but-has-none.test.ts";
 
-describe(globalSuite, "Given a user has no katas configured", () => {
-  describe("When the user adds a kata from github", () => {
+export const kataAddedSuite = describe(
+  freshInstallationSuite,
+  "When the user adds a kata from github",
+  () => {
     const kataUrl = new URL(
       `https://api.github.com/repos/rsm-hcd/cop-clean-code-katas/contents/kata-templates/hello-world`
     );
@@ -21,5 +24,5 @@ describe(globalSuite, "Given a user has no katas configured", () => {
         );
       });
     });
-  });
-});
+  }
+);

@@ -14,8 +14,6 @@ export async function beginKata(
     );
   }
   await recursiveCopy(kataDownloadUrl, destinationDirectory);
-
-  // create the files in the given directory location
 }
 
 async function getKataDownloadUrl(kataName: string): Promise<string> {
@@ -29,36 +27,32 @@ async function recursiveCopy(
   kataDownloadUrl: string,
   localFolderPath: string
 ): Promise<void> {
-  try {
-    const githubResults = await downloadContents(kataDownloadUrl);
-    // Create the destination directory if it doesn't exist
-    await createFolder(localFolderPath);
+  const githubResults = await downloadContents(kataDownloadUrl);
+  // Create the destination directory if it doesn't exist
+  await createFolder(localFolderPath);
 
-    // Download each file from the folder
-    for (const file of githubResults) {
-      const localFilePath = `${localFolderPath}/${file.name}`;
-      if (file.type === "file") {
-        // Download and write file content
-        const fileUrl = file.download_url;
-        if (!fileUrl) {
-          throw new Error(`No download URL found for file: ${file.name}`);
-        }
-        const fileResponse = await fetch(fileUrl);
+  // Download each file from the folder
+  for (const file of githubResults) {
+    const localFilePath = `${localFolderPath}/${file.name}`;
+    if (file.type === "file") {
+      // Download and write file content
+      const fileUrl = file.download_url;
+      if (!fileUrl) {
+        throw new Error(`No download URL found for file: ${file.name}`);
+      }
+      const fileResponse = await fetch(fileUrl);
 
-        if (!fileResponse.ok) {
-          throw new Error(`Failed to download file: ${file.name}`);
-        }
-
-        const fileContent = await fileResponse.text();
-        await Deno.writeTextFile(localFilePath, fileContent);
+      if (!fileResponse.ok) {
+        throw new Error(`Failed to download file: ${file.name}`);
       }
 
-      // Recursive call for subdirectories
-      if (file.type === "dir") {
-        await recursiveCopy(file.path, localFilePath);
-      }
+      const fileContent = await fileResponse.text();
+      await Deno.writeTextFile(localFilePath, fileContent);
     }
-  } catch (error) {
-    console.error(`Error copying folder: ${error}`);
+
+    // Recursive call for subdirectories
+    if (file.type === "dir") {
+      await recursiveCopy(file.path, localFilePath);
+    }
   }
 }

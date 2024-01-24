@@ -13,10 +13,6 @@ export function beginCommand(denomander: Denomander) {
     )
     .action(async () => {
       try {
-        // now we need to actually hydrate the directory from github
-        // i changed the store name. I wonder how this works when i just run the tool
-        // if i have to run the tool to know how it works then i need to get that in the tests
-        // so i maintain 100% confidence in the tests
         await beginKata(
           denomander.kataName,
           `${denomander.directory}/${denomander.kataName}`
@@ -25,7 +21,7 @@ export function beginCommand(denomander: Denomander) {
           `Directory hydrated successfully for Kata: ${denomander.kataName}`
         );
       } catch (error) {
-        console.log(error.message);
+        console.log(`%c${error.message}`, "color: red");
       }
     });
 }

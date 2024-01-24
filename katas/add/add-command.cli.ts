@@ -9,11 +9,7 @@ export function addCommand(denomander: Denomander) {
       "The url to the root of the repository containing the katas"
     )
     .action(async () => {
-      try {
-        const kata = await addKata(denomander.kataUrl);
-        console.log(`${kata.name} added successfully!`);
-      } catch (error) {
-        console.log(error.message);
-      }
+      const kata = await addKata(denomander.kataUrl);
+      console.log(`${kata.name} added successfully!`);
     });
 }

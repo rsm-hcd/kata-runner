@@ -6,11 +6,7 @@ export function removeCommand(denomander: Denomander) {
     .subCommand("remove [kataName]", "Remove All Katas")
     .argDescription("kataName", "The name of the kata to be removed")
     .action(async () => {
-      try {
-        await removeKataByName(denomander.kataName);
-        console.log(`${denomander.kataName} removed successfully!`);
-      } catch (error) {
-        console.log(error.message);
-      }
+      await removeKataByName(denomander.kataName);
+      console.log(`${denomander.kataName} removed successfully!`);
     });
 }

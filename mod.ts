@@ -19,4 +19,8 @@ function runCliTool() {
   program.parse(Deno.args);
 }
 
-runCliTool();
+try {
+  runCliTool();
+} catch (error) {
+  console.log(`%c${error.message}`, "color: red");
+}

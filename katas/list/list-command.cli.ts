@@ -8,6 +8,7 @@ export function listCommand(denomander: Denomander) {
       const katas = await listKatas();
       if (katas.length === 0) {
         console.log("There are no katas added on this machine.");
+        return;
       }
       console.log("katas:", katas);
     });

@@ -28,12 +28,33 @@ deno install --unstable -A -f -n kata https://raw.githubusercontent.com/rsm-hcd/
 ### 3. Begin your first Kata
 
 - Since this is your first time using this, lets see what commands are available
-  to us: `kata -h`
+  to us: 
+```sh
+kata -h
+```
 - One of the commands is the `list` command. Lets list all of our registered
-  Katas: `kata list`
+  Katas: 
+```sh
+kata list
+```
 - You should see that you have none. so lets add one:
-  `kata add https://api.github.com/repos/rsm-hcd/cop-clean-code-katas/contents/kata-templates/hello-world`
-- Now you have a kata added and we can now see that listed out: `kata list`
+```sh
+kata add https://api.github.com/repos/rsm-hcd/cop-clean-code-katas/contents/kata-templates/hello-world
+```
+
+- Now you have a kata added and we can now see that listed out:
+```sh
+kata list
+```
   - Notice that the kata has a name of `hello-world`
-- Lets begin the kata. Navigate to an empty directory of your choice run the following command inside of a terminal: `kata begin hello-world`. This will populate your current directory
+- Lets begin the kata. Navigate to an empty directory of your choice run the following command inside of a terminal: 
+```sh
+kata begin hello-world
+```
+This will populate your current directory
 with the hello-world kata. 
+
+## To Uninstall
+```sh
+deno uninstall kata
+```

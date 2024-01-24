@@ -1,8 +1,10 @@
 import { Denomander } from "./deps.ts";
 import { registerKataCommands } from "./katas/mod.ts";
+import { registerUpdateCommand } from "./update/mod.ts";
 
 function registerCommands(denomander: Denomander) {
   registerKataCommands(denomander);
+  registerUpdateCommand(denomander);
 }
 
 function runCliTool() {

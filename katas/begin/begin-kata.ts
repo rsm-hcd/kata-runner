@@ -8,6 +8,11 @@ export async function beginKata(
   destinationDirectory: string
 ): Promise<void> {
   const kataDownloadUrl = await getKataDownloadUrl(kataName);
+  if (!kataDownloadUrl) {
+    throw new Error(
+      `A kata by the name of "${kataName}" could not be found. Try adding this kata first.`
+    );
+  }
   await recursiveCopy(kataDownloadUrl, destinationDirectory);
 
   // create the files in the given directory location

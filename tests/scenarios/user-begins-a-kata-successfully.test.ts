@@ -9,7 +9,7 @@ import { createFolder } from "../../file-system/mod.ts";
 import { GlobalContext } from "./_global-scenario-setup.test.ts";
 import { kataIsListedSuite } from "./user-lists-added-katas.test.ts";
 
-describe(kataIsListedSuite, "Given the user is in an empty folder", () => {
+describe(kataIsListedSuite, "Given the user has a kata added", () => {
   beforeAll(async () => {
     await createFolder("tests/test-sandbox/hello-world");
   });

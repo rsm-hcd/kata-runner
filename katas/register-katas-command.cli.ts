@@ -1,4 +1,4 @@
-import { Denomander } from "../deps.ts";
+import Denomander from "Denomander";
 import { addCommand } from "./add/mod.ts";
 import { beginCommand } from "./begin/mod.ts";
 import { listCommand } from "./list/mod.ts";

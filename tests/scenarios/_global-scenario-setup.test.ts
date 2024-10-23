@@ -1,4 +1,4 @@
-import { describe } from "../../deps.ts";
+import { describe } from "@std/testing/bdd";
 import { DirectoryFixture } from "../directory.fixture.ts";
 import { HelpFixture } from "../help.fixture.ts";
 import { KataFixture } from "../kata.fixture.ts";

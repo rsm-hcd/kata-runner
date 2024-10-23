@@ -1,4 +1,4 @@
-import { Denomander } from "../../deps.ts";
+import Denomander from "Denomander";
 import { beginKata } from "./begin-kata.ts";
 
 export function beginCommand(denomander: Denomander) {
@@ -21,7 +21,9 @@ export function beginCommand(denomander: Denomander) {
           `Directory hydrated successfully for Kata: ${denomander.kataName}`
         );
       } catch (error) {
-        console.log(`%c${error.message}`, "color: red");
+        if (error instanceof Error) {
+          console.log(`%c${error.message}`, "color: red");
+        }
       }
     });
 }

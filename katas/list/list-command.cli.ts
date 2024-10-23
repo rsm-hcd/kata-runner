@@ -1,4 +1,4 @@
-import { Denomander } from "../../deps.ts";
+import Denomander from "Denomander";
 import { listKatas } from "./list-katas.ts";
 
 export function listCommand(denomander: Denomander) {

@@ -1,10 +1,5 @@
-import {
-  assert,
-  assertStringIncludes,
-  beforeAll,
-  describe,
-  it,
-} from "../../deps.ts";
+import { assert, assertStringIncludes } from "@std/assert";
+import { beforeAll, describe, it } from "@std/testing/bdd";
 import { GlobalContext } from "./_global-scenario-setup.test.ts";
 import { kataIsListedSuite } from "./user-lists-added-katas.test.ts";
 

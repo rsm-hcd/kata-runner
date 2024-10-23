@@ -1,4 +1,4 @@
-import { Denomander } from "../../deps.ts";
+import Denomander from "Denomander";
 import { removeKataByName } from "./remove-kata-by-name.ts";
 
 export function removeCommand(denomander: Denomander) {

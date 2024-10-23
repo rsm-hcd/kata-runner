@@ -1,4 +1,4 @@
-import { emptyDir, ensureDir } from "../deps.ts";
+import { emptyDir, ensureDir } from "@std/fs";
 
 export class DirectoryFixture {
   private static workingDirectoryPath = "./tests/test-sandbox";
